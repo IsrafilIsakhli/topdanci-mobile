@@ -1,0 +1,1147 @@
+[
+  {
+    "slug": "qida-ve-icki",
+    "name": "Qida və içki",
+    "icon": "package",
+    "children": [
+      {
+        "slug": "erzaq-mehsullari",
+        "name": "Ərzaq məhsulları",
+        "children": [
+          {
+            "slug": "un-seker-ve-duz",
+            "name": "Un, şəkər və duz"
+          },
+          {
+            "slug": "duyu-makaron-ve-yarma",
+            "name": "Düyü, makaron və yarma"
+          },
+          {
+            "slug": "yaglar-ve-souslar",
+            "name": "Yağlar və souslar"
+          },
+          {
+            "slug": "konserv-mehsullari",
+            "name": "Konserv məhsulları"
+          }
+        ]
+      },
+      {
+        "slug": "ickiler",
+        "name": "İçkilər",
+        "children": [
+          {
+            "slug": "su-ve-mineral-sular",
+            "name": "Su və mineral sular"
+          },
+          {
+            "slug": "sireler-ve-qazli-ickiler",
+            "name": "Şirələr və qazlı içkilər"
+          },
+          {
+            "slug": "cay-ve-qehve",
+            "name": "Çay və qəhvə"
+          },
+          {
+            "slug": "enerji-ickileri",
+            "name": "Enerji içkiləri"
+          }
+        ]
+      },
+      {
+        "slug": "sirniyyat-ve-qelyanaltilar",
+        "name": "Şirniyyat və qəlyanaltılar",
+        "children": [
+          {
+            "slug": "sokolad-ve-konfetler",
+            "name": "Şokolad və konfetlər"
+          },
+          {
+            "slug": "biskvit-ve-pecenye",
+            "name": "Biskvit və peçenye"
+          },
+          {
+            "slug": "cips-ve-snack-mehsullari",
+            "name": "Çips və snack məhsulları"
+          }
+        ]
+      },
+      {
+        "slug": "dondurulmus-mehsullar",
+        "name": "Dondurulmuş məhsullar",
+        "children": [
+          {
+            "slug": "dondurulmus-et",
+            "name": "Dondurulmuş ət"
+          },
+          {
+            "slug": "dondurulmus-toyuq",
+            "name": "Dondurulmuş toyuq"
+          },
+          {
+            "slug": "dondurulmus-baliq",
+            "name": "Dondurulmuş balıq"
+          },
+          {
+            "slug": "yarimfabrikatlar",
+            "name": "Yarımfabrikatlar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "geyim-ayaqqabi-ve-tekstil",
+    "name": "Geyim, ayaqqabı və tekstil",
+    "icon": "shirt",
+    "children": [
+      {
+        "slug": "qadin-geyimi",
+        "name": "Qadın geyimi",
+        "children": [
+          {
+            "slug": "donlar-ve-etekler",
+            "name": "Donlar və ətəklər"
+          },
+          {
+            "slug": "koynek-ve-bluzlar",
+            "name": "Köynək və bluzlar"
+          },
+          {
+            "slug": "godekceler-ve-paltolar",
+            "name": "Gödəkçələr və paltolar"
+          }
+        ]
+      },
+      {
+        "slug": "kisi-geyimi",
+        "name": "Kişi geyimi",
+        "children": [
+          {
+            "slug": "koynekler",
+            "name": "Köynəklər"
+          },
+          {
+            "slug": "salvarlar",
+            "name": "Şalvarlar"
+          },
+          {
+            "slug": "kostyumlar",
+            "name": "Kostyumlar"
+          },
+          {
+            "slug": "godekceler",
+            "name": "Gödəkçələr"
+          }
+        ]
+      },
+      {
+        "slug": "usaq-geyimi",
+        "name": "Uşaq geyimi",
+        "children": [
+          {
+            "slug": "korpe-geyimleri",
+            "name": "Körpə geyimləri"
+          },
+          {
+            "slug": "mektebli-geyimleri",
+            "name": "Məktəbli geyimləri"
+          },
+          {
+            "slug": "usaq-ust-geyimleri",
+            "name": "Uşaq üst geyimləri"
+          }
+        ]
+      },
+      {
+        "slug": "ayaqqabi",
+        "name": "Ayaqqabı",
+        "children": [
+          {
+            "slug": "qadin-ayaqqabilari",
+            "name": "Qadın ayaqqabıları"
+          },
+          {
+            "slug": "kisi-ayaqqabilari",
+            "name": "Kişi ayaqqabıları"
+          },
+          {
+            "slug": "usaq-ayaqqabilari",
+            "name": "Uşaq ayaqqabıları"
+          },
+          {
+            "slug": "idman-ayaqqabilari",
+            "name": "İdman ayaqqabıları"
+          }
+        ]
+      },
+      {
+        "slug": "ev-tekstili",
+        "name": "Ev tekstili",
+        "children": [
+          {
+            "slug": "yataq-destleri",
+            "name": "Yataq dəstləri"
+          },
+          {
+            "slug": "desmallar",
+            "name": "Dəsmallar"
+          },
+          {
+            "slug": "perdeler",
+            "name": "Pərdələr"
+          },
+          {
+            "slug": "sufre-ve-ortukler",
+            "name": "Süfrə və örtüklər"
+          }
+        ]
+      },
+      {
+        "slug": "parca-ve-tikis-levazimatlari",
+        "name": "Parça və tikiş ləvazimatları",
+        "children": [
+          {
+            "slug": "parcalar",
+            "name": "Parçalar"
+          },
+          {
+            "slug": "iplik-ve-saplar",
+            "name": "İplik və saplar"
+          },
+          {
+            "slug": "duyme-fermuar-ve-aksesuarlar",
+            "name": "Düymə, fermuar və aksesuarlar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "elektronika-ve-aksesuarlar",
+    "name": "Elektronika və aksesuarlar",
+    "icon": "headphones",
+    "children": [
+      {
+        "slug": "telefon-ve-aksesuarlar",
+        "name": "Telefon və aksesuarlar",
+        "children": [
+          {
+            "slug": "telefon-qablari",
+            "name": "Telefon qabları"
+          },
+          {
+            "slug": "ekran-qoruyuculari",
+            "name": "Ekran qoruyucuları"
+          },
+          {
+            "slug": "adapter-ve-kabeller",
+            "name": "Adapter və kabellər"
+          },
+          {
+            "slug": "powerbanklar",
+            "name": "Powerbanklar"
+          }
+        ]
+      },
+      {
+        "slug": "komputer-ve-ofis-texnikasi",
+        "name": "Kompüter və ofis texnikası",
+        "children": [
+          {
+            "slug": "noutbuklar",
+            "name": "Noutbuklar"
+          },
+          {
+            "slug": "monitorlar",
+            "name": "Monitorlar"
+          },
+          {
+            "slug": "printerler",
+            "name": "Printerlər"
+          },
+          {
+            "slug": "klaviatura-ve-sicanlar",
+            "name": "Klaviatura və siçanlar"
+          }
+        ]
+      },
+      {
+        "slug": "audio-ve-video",
+        "name": "Audio və video",
+        "children": [
+          {
+            "slug": "qulaqliqlar",
+            "name": "Qulaqlıqlar"
+          },
+          {
+            "slug": "dinamikler",
+            "name": "Dinamiklər"
+          },
+          {
+            "slug": "mikrofonlar",
+            "name": "Mikrofonlar"
+          },
+          {
+            "slug": "kamera-avadanliqlari",
+            "name": "Kamera avadanlıqları"
+          }
+        ]
+      },
+      {
+        "slug": "smart-cihazlar",
+        "name": "Smart cihazlar",
+        "children": [
+          {
+            "slug": "smart-saatlar",
+            "name": "Smart saatlar"
+          },
+          {
+            "slug": "smart-ev-cihazlari",
+            "name": "Smart ev cihazları"
+          },
+          {
+            "slug": "tv-box-ve-media-cihazlari",
+            "name": "TV box və media cihazları"
+          }
+        ]
+      },
+      {
+        "slug": "elektronika-ehtiyat-hisseleri",
+        "name": "Elektronika ehtiyat hissələri",
+        "children": [
+          {
+            "slug": "batareyalar",
+            "name": "Batareyalar"
+          },
+          {
+            "slug": "ekranlar",
+            "name": "Ekranlar"
+          },
+          {
+            "slug": "plata-ve-modullar",
+            "name": "Plata və modullar"
+          },
+          {
+            "slug": "temir-aletleri",
+            "name": "Təmir alətləri"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "meiset-texnikasi",
+    "name": "Məişət texnikası",
+    "icon": "washing-machine",
+    "children": [
+      {
+        "slug": "boyuk-meiset-texnikasi",
+        "name": "Böyük məişət texnikası",
+        "children": [
+          {
+            "slug": "soyuducular",
+            "name": "Soyuducular"
+          },
+          {
+            "slug": "paltaryuyan-masinlar",
+            "name": "Paltaryuyan maşınlar"
+          },
+          {
+            "slug": "qabyuyan-masinlar",
+            "name": "Qabyuyan maşınlar"
+          },
+          {
+            "slug": "kondisionerler",
+            "name": "Kondisionerlər"
+          }
+        ]
+      },
+      {
+        "slug": "kicik-meiset-texnikasi",
+        "name": "Kiçik məişət texnikası",
+        "children": [
+          {
+            "slug": "tozsoranlar",
+            "name": "Tozsoranlar"
+          },
+          {
+            "slug": "blenderler",
+            "name": "Blenderlər"
+          },
+          {
+            "slug": "caydan-ve-kofe-aparatlari",
+            "name": "Çaydan və kofe aparatları"
+          },
+          {
+            "slug": "utuler",
+            "name": "Ütülər"
+          }
+        ]
+      },
+      {
+        "slug": "metbex-texnikasi",
+        "name": "Mətbəx texnikası",
+        "children": [
+          {
+            "slug": "sobalar",
+            "name": "Sobalar"
+          },
+          {
+            "slug": "mikrodalgali-sobalar",
+            "name": "Mikrodalğalı sobalar"
+          },
+          {
+            "slug": "aspiratorlar",
+            "name": "Aspiratorlar"
+          },
+          {
+            "slug": "elektrik-pliteleri",
+            "name": "Elektrik plitələri"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "ev-bag-ve-mebel",
+    "name": "Ev, bağ və mebel",
+    "icon": "house",
+    "children": [
+      {
+        "slug": "mebel",
+        "name": "Mebel",
+        "children": [
+          {
+            "slug": "ofis-mebeli",
+            "name": "Ofis mebeli"
+          },
+          {
+            "slug": "metbex-mebeli",
+            "name": "Mətbəx mebeli"
+          },
+          {
+            "slug": "yataq-otagi-mebeli",
+            "name": "Yataq otağı mebeli"
+          },
+          {
+            "slug": "masa-ve-stullar",
+            "name": "Masa və stullar"
+          }
+        ]
+      },
+      {
+        "slug": "ev-esyalari",
+        "name": "Ev əşyaları",
+        "children": [
+          {
+            "slug": "dekor-mehsullari",
+            "name": "Dekor məhsulları"
+          },
+          {
+            "slug": "saxlama-qutulari",
+            "name": "Saxlama qutuları"
+          },
+          {
+            "slug": "temizlik-levazimatlari",
+            "name": "Təmizlik ləvazimatları"
+          }
+        ]
+      },
+      {
+        "slug": "bag-ve-heyet",
+        "name": "Bağ və həyət",
+        "children": [
+          {
+            "slug": "bag-aletleri",
+            "name": "Bağ alətləri"
+          },
+          {
+            "slug": "suvarma-sistemleri",
+            "name": "Suvarma sistemləri"
+          },
+          {
+            "slug": "heyet-mebeli",
+            "name": "Həyət mebeli"
+          },
+          {
+            "slug": "bitki-ve-gubreler",
+            "name": "Bitki və gübrələr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "tikinti-ve-temir",
+    "name": "Tikinti və təmir",
+    "icon": "wrench",
+    "children": [
+      {
+        "slug": "tikinti-materiallari",
+        "name": "Tikinti materialları",
+        "children": [
+          {
+            "slug": "sement-ve-qum",
+            "name": "Sement və qum"
+          },
+          {
+            "slug": "kerpic-ve-bloklar",
+            "name": "Kərpic və bloklar"
+          },
+          {
+            "slug": "alcipan-ve-profiller",
+            "name": "Alçıpan və profillər"
+          },
+          {
+            "slug": "izolyasiya-materiallari",
+            "name": "İzolyasiya materialları"
+          }
+        ]
+      },
+      {
+        "slug": "boya-ve-kimyevi-mehsullar",
+        "name": "Boya və kimyəvi məhsullar",
+        "children": [
+          {
+            "slug": "divar-boyalari",
+            "name": "Divar boyaları"
+          },
+          {
+            "slug": "lak-ve-astarlar",
+            "name": "Lak və astarlar"
+          },
+          {
+            "slug": "yapisdiricilar",
+            "name": "Yapışdırıcılar"
+          },
+          {
+            "slug": "hermetikler",
+            "name": "Hermetiklər"
+          }
+        ]
+      },
+      {
+        "slug": "elektrik-materiallari",
+        "name": "Elektrik materialları",
+        "children": [
+          {
+            "slug": "kabeller",
+            "name": "Kabellər"
+          },
+          {
+            "slug": "rozetka-ve-acarlar",
+            "name": "Rozetka və açarlar"
+          },
+          {
+            "slug": "isiqlandirma",
+            "name": "İşıqlandırma"
+          },
+          {
+            "slug": "elektrik-panelleri",
+            "name": "Elektrik panelləri"
+          }
+        ]
+      },
+      {
+        "slug": "santexnika",
+        "name": "Santexnika",
+        "children": [
+          {
+            "slug": "borular",
+            "name": "Borular"
+          },
+          {
+            "slug": "kranlar",
+            "name": "Kranlar"
+          },
+          {
+            "slug": "vanna-ve-dus-sistemleri",
+            "name": "Vanna və duş sistemləri"
+          },
+          {
+            "slug": "su-nasoslari",
+            "name": "Su nasosları"
+          }
+        ]
+      },
+      {
+        "slug": "aletler",
+        "name": "Alətlər",
+        "children": [
+          {
+            "slug": "elektrik-aletleri",
+            "name": "Elektrik alətləri"
+          },
+          {
+            "slug": "el-aletleri",
+            "name": "Əl alətləri"
+          },
+          {
+            "slug": "olcu-aletleri",
+            "name": "Ölçü alətləri"
+          },
+          {
+            "slug": "qaynaq-avadanligi",
+            "name": "Qaynaq avadanlığı"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "avto-neqliyyat-ve-ehtiyat-hisseleri",
+    "name": "Avto, nəqliyyat və ehtiyat hissələri",
+    "icon": "car",
+    "children": [
+      {
+        "slug": "avtomobil-ehtiyat-hisseleri",
+        "name": "Avtomobil ehtiyat hissələri",
+        "children": [
+          {
+            "slug": "muherrik-hisseleri",
+            "name": "Mühərrik hissələri"
+          },
+          {
+            "slug": "kuzov-hisseleri",
+            "name": "Kuzov hissələri"
+          },
+          {
+            "slug": "eylec-sistemi",
+            "name": "Əyləc sistemi"
+          },
+          {
+            "slug": "filtrler-ve-yaglar",
+            "name": "Filtrlər və yağlar"
+          }
+        ]
+      },
+      {
+        "slug": "avto-aksesuarlar",
+        "name": "Avto aksesuarlar",
+        "children": [
+          {
+            "slug": "salon-aksesuarlari",
+            "name": "Salon aksesuarları"
+          },
+          {
+            "slug": "siqnalizasiya",
+            "name": "Siqnalizasiya"
+          },
+          {
+            "slug": "kamera-ve-monitorlar",
+            "name": "Kamera və monitorlar"
+          },
+          {
+            "slug": "teker-ve-disk-aksesuarlari",
+            "name": "Təkər və disk aksesuarları"
+          }
+        ]
+      },
+      {
+        "slug": "tekerler-ve-diskler",
+        "name": "Təkərlər və disklər",
+        "children": [
+          {
+            "slug": "yay-tekerleri",
+            "name": "Yay təkərləri"
+          },
+          {
+            "slug": "qis-tekerleri",
+            "name": "Qış təkərləri"
+          },
+          {
+            "slug": "yuk-masini-tekerleri",
+            "name": "Yük maşını təkərləri"
+          },
+          {
+            "slug": "diskler",
+            "name": "Disklər"
+          }
+        ]
+      },
+      {
+        "slug": "yuk-ve-kommersiya-neqliyyati",
+        "name": "Yük və kommersiya nəqliyyatı",
+        "children": [
+          {
+            "slug": "yuk-masini-hisseleri",
+            "name": "Yük maşını hissələri"
+          },
+          {
+            "slug": "avtobus-hisseleri",
+            "name": "Avtobus hissələri"
+          },
+          {
+            "slug": "qosqu-hisseleri",
+            "name": "Qoşqu hissələri"
+          },
+          {
+            "slug": "texniki-yaglar",
+            "name": "Texniki yağlar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "gozellik-saglamliq-ve-sexsi-qulluq",
+    "name": "Gözəllik, sağlamlıq və şəxsi qulluq",
+    "icon": "shirt",
+    "children": [
+      {
+        "slug": "kosmetika",
+        "name": "Kosmetika",
+        "children": [
+          {
+            "slug": "makiyaj-mehsullari",
+            "name": "Makiyaj məhsulları"
+          },
+          {
+            "slug": "deri-baximi",
+            "name": "Dəri baxımı"
+          },
+          {
+            "slug": "sac-baximi",
+            "name": "Saç baxımı"
+          },
+          {
+            "slug": "etir-ve-parfumeriya",
+            "name": "Ətir və parfümeriya"
+          }
+        ]
+      },
+      {
+        "slug": "salon-mehsullari",
+        "name": "Salon məhsulları",
+        "children": [
+          {
+            "slug": "manikur-levazimatlari",
+            "name": "Manikür ləvazimatları"
+          },
+          {
+            "slug": "berber-aletleri",
+            "name": "Bərbər alətləri"
+          },
+          {
+            "slug": "salon-mebeli",
+            "name": "Salon mebeli"
+          },
+          {
+            "slug": "sterilizasiya-avadanligi",
+            "name": "Sterilizasiya avadanlığı"
+          }
+        ]
+      },
+      {
+        "slug": "tibbi-ve-gigiyena-mehsullari",
+        "name": "Tibbi və gigiyena məhsulları",
+        "children": [
+          {
+            "slug": "maskalar-ve-elcekler",
+            "name": "Maskalar və əlcəklər"
+          },
+          {
+            "slug": "dezinfeksiya-mehsullari",
+            "name": "Dezinfeksiya məhsulları"
+          },
+          {
+            "slug": "tibbi-serfiyyat",
+            "name": "Tibbi sərfiyyat"
+          },
+          {
+            "slug": "ortopedik-mehsullar",
+            "name": "Ortopedik məhsullar"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "usaq-mehsullari",
+    "name": "Uşaq məhsulları",
+    "icon": "baby",
+    "children": [
+      {
+        "slug": "oyuncaqlar",
+        "name": "Oyuncaqlar",
+        "children": [
+          {
+            "slug": "tedris-oyuncaqlari",
+            "name": "Tədris oyuncaqları"
+          },
+          {
+            "slug": "yumsaq-oyuncaqlar",
+            "name": "Yumşaq oyuncaqlar"
+          },
+          {
+            "slug": "konstruktorlar",
+            "name": "Konstruktorlar"
+          },
+          {
+            "slug": "aciq-hava-oyuncaqlari",
+            "name": "Açıq hava oyuncaqları"
+          }
+        ]
+      },
+      {
+        "slug": "korpe-mehsullari",
+        "name": "Körpə məhsulları",
+        "children": [
+          {
+            "slug": "usaq-arabalari",
+            "name": "Uşaq arabaları"
+          },
+          {
+            "slug": "besik-ve-carpayilar",
+            "name": "Beşik və çarpayılar"
+          },
+          {
+            "slug": "qidalanma-mehsullari",
+            "name": "Qidalanma məhsulları"
+          },
+          {
+            "slug": "usaq-gigiyenasi",
+            "name": "Uşaq gigiyenası"
+          }
+        ]
+      },
+      {
+        "slug": "mekteb-mehsullari",
+        "name": "Məktəb məhsulları",
+        "children": [
+          {
+            "slug": "defter-ve-qelemler",
+            "name": "Dəftər və qələmlər"
+          },
+          {
+            "slug": "cantalar",
+            "name": "Çantalar"
+          },
+          {
+            "slug": "mekteb-formalari",
+            "name": "Məktəb formaları"
+          },
+          {
+            "slug": "ofis-ve-mekteb-levazimatlari",
+            "name": "Ofis və məktəb ləvazimatları"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "qablasdirma-ve-reklam-mehsullari",
+    "name": "Qablaşdırma və reklam məhsulları",
+    "icon": "package",
+    "children": [
+      {
+        "slug": "qablasdirma-materiallari",
+        "name": "Qablaşdırma materialları",
+        "children": [
+          {
+            "slug": "karton-qutular",
+            "name": "Karton qutular"
+          },
+          {
+            "slug": "paketler",
+            "name": "Paketlər"
+          },
+          {
+            "slug": "strec-ve-skoc",
+            "name": "Streç və skoç"
+          },
+          {
+            "slug": "kagiz-qablasdirma",
+            "name": "Kağız qablaşdırma"
+          }
+        ]
+      },
+      {
+        "slug": "birdefelik-mehsullar",
+        "name": "Birdəfəlik məhsullar",
+        "children": [
+          {
+            "slug": "plastik-qablar",
+            "name": "Plastik qablar"
+          },
+          {
+            "slug": "kagiz-stekanlar",
+            "name": "Kağız stəkanlar"
+          },
+          {
+            "slug": "salfetler",
+            "name": "Salfetlər"
+          },
+          {
+            "slug": "cengel-qasiq-ve-bicaqlar",
+            "name": "Çəngəl, qaşıq və bıçaqlar"
+          }
+        ]
+      },
+      {
+        "slug": "reklam-ve-promo-mehsullar",
+        "name": "Reklam və promo məhsullar",
+        "children": [
+          {
+            "slug": "vizit-kartlar",
+            "name": "Vizit kartlar"
+          },
+          {
+            "slug": "buklet-ve-flayerler",
+            "name": "Buklet və flayerlər"
+          },
+          {
+            "slug": "brendli-paketler",
+            "name": "Brendli paketlər"
+          },
+          {
+            "slug": "promo-hediyyeler",
+            "name": "Promo hədiyyələr"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "biznes-ve-magaza-avadanligi",
+    "name": "Biznes və mağaza avadanlığı",
+    "icon": "briefcase-business",
+    "children": [
+      {
+        "slug": "market-avadanligi",
+        "name": "Market avadanlığı",
+        "children": [
+          {
+            "slug": "soyuducu-vitrinler",
+            "name": "Soyuducu vitrinlər"
+          },
+          {
+            "slug": "refler",
+            "name": "Rəflər"
+          },
+          {
+            "slug": "kassa-aparatlari",
+            "name": "Kassa aparatları"
+          },
+          {
+            "slug": "tereziler",
+            "name": "Tərəzilər"
+          }
+        ]
+      },
+      {
+        "slug": "restoran-ve-kafe-avadanligi",
+        "name": "Restoran və kafe avadanlığı",
+        "children": [
+          {
+            "slug": "pesekar-metbex-avadanligi",
+            "name": "Peşəkar mətbəx avadanlığı"
+          },
+          {
+            "slug": "qehve-aparatlari",
+            "name": "Qəhvə aparatları"
+          },
+          {
+            "slug": "soba-ve-qril-sistemleri",
+            "name": "Soba və qril sistemləri"
+          },
+          {
+            "slug": "soyuducu-dolablar",
+            "name": "Soyuducu dolablar"
+          }
+        ]
+      },
+      {
+        "slug": "ofis-avadanligi",
+        "name": "Ofis avadanlığı",
+        "children": [
+          {
+            "slug": "ofis-masalari",
+            "name": "Ofis masaları"
+          },
+          {
+            "slug": "ofis-stullari",
+            "name": "Ofis stulları"
+          },
+          {
+            "slug": "seyfler",
+            "name": "Seyflər"
+          },
+          {
+            "slug": "arxiv-dolablari",
+            "name": "Arxiv dolabları"
+          }
+        ]
+      },
+      {
+        "slug": "tehlukesizlik-sistemleri",
+        "name": "Təhlükəsizlik sistemləri",
+        "children": [
+          {
+            "slug": "kamera-sistemleri",
+            "name": "Kamera sistemləri"
+          },
+          {
+            "slug": "tehlukesizlik-sistemleri-siqnalizasiya",
+            "name": "Siqnalizasiya"
+          },
+          {
+            "slug": "giris-cixis-sistemleri",
+            "name": "Giriş-çıxış sistemləri"
+          },
+          {
+            "slug": "yanginsondurme-avadanligi",
+            "name": "Yanğınsöndürmə avadanlığı"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "kend-teserrufati-ve-heyvandarliq",
+    "name": "Kənd təsərrüfatı və heyvandarlıq",
+    "icon": "package",
+    "children": [
+      {
+        "slug": "toxum-ve-gubre",
+        "name": "Toxum və gübrə",
+        "children": [
+          {
+            "slug": "terevez-toxumlari",
+            "name": "Tərəvəz toxumları"
+          },
+          {
+            "slug": "meyve-tingleri",
+            "name": "Meyvə tingləri"
+          },
+          {
+            "slug": "mineral-gubreler",
+            "name": "Mineral gübrələr"
+          },
+          {
+            "slug": "orqanik-gubreler",
+            "name": "Orqanik gübrələr"
+          }
+        ]
+      },
+      {
+        "slug": "kend-teserrufati-avadanligi",
+        "name": "Kənd təsərrüfatı avadanlığı",
+        "children": [
+          {
+            "slug": "kend-teserrufati-avadanligi-suvarma-sistemleri",
+            "name": "Suvarma sistemləri"
+          },
+          {
+            "slug": "kend-teserrufati-avadanligi-el-aletleri",
+            "name": "Əl alətləri"
+          },
+          {
+            "slug": "kicik-texnika",
+            "name": "Kiçik texnika"
+          },
+          {
+            "slug": "traktor-hisseleri",
+            "name": "Traktor hissələri"
+          }
+        ]
+      },
+      {
+        "slug": "heyvandarliq-mehsullari",
+        "name": "Heyvandarlıq məhsulları",
+        "children": [
+          {
+            "slug": "yem-mehsullari",
+            "name": "Yem məhsulları"
+          },
+          {
+            "slug": "qusculuq-avadanligi",
+            "name": "Quşçuluq avadanlığı"
+          },
+          {
+            "slug": "sudculuk-avadanligi",
+            "name": "Südçülük avadanlığı"
+          },
+          {
+            "slug": "baytarliq-mehsullari",
+            "name": "Baytarlıq məhsulları"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "xidmetler-ve-b2b-heller",
+    "name": "Xidmətlər və B2B həllər",
+    "icon": "briefcase-business",
+    "children": [
+      {
+        "slug": "logistika-ve-dasinma",
+        "name": "Logistika və daşınma",
+        "children": [
+          {
+            "slug": "seherdaxili-dasinma",
+            "name": "Şəhərdaxili daşınma"
+          },
+          {
+            "slug": "regionlara-catdirma",
+            "name": "Regionlara çatdırma"
+          },
+          {
+            "slug": "yuk-masini-xidmeti",
+            "name": "Yük maşını xidməti"
+          },
+          {
+            "slug": "anbar-xidmeti",
+            "name": "Anbar xidməti"
+          }
+        ]
+      },
+      {
+        "slug": "temir-ve-qurasdirma",
+        "name": "Təmir və quraşdırma",
+        "children": [
+          {
+            "slug": "kondisioner-qurasdirilmasi",
+            "name": "Kondisioner quraşdırılması"
+          },
+          {
+            "slug": "elektrik-isleri",
+            "name": "Elektrik işləri"
+          },
+          {
+            "slug": "santexnika-isleri",
+            "name": "Santexnika işləri"
+          },
+          {
+            "slug": "avadanliq-temiri",
+            "name": "Avadanlıq təmiri"
+          }
+        ]
+      },
+      {
+        "slug": "biznes-xidmetleri",
+        "name": "Biznes xidmətləri",
+        "children": [
+          {
+            "slug": "muhasibat-xidmeti",
+            "name": "Mühasibat xidməti"
+          },
+          {
+            "slug": "huquq-xidmeti",
+            "name": "Hüquq xidməti"
+          },
+          {
+            "slug": "reklam-ve-dizayn",
+            "name": "Reklam və dizayn"
+          },
+          {
+            "slug": "it-xidmetleri",
+            "name": "IT xidmətləri"
+          }
+        ]
+      }
+    ]
+  }
+]
