@@ -1,3 +1,5 @@
+import { CachedNotice } from '../../../features/catalog/detail-actions';
+import { OfflineBanner } from '../../../features/network/connectivity';
 import { SearchPanel } from '../../../features/buyer/search-panel';
 import { useLibrary } from '../../../features/buyer/library';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -87,7 +89,7 @@ function ProductCatalog({ initial }: { initial: { q: string; category: string; s
   const renderProduct = useCallback(({ item }: { item: Product }) =>
     <CatalogProductCard product={item} width={cardWidth} list={singleColumn} />, [cardWidth, singleColumn]);
 
-  return <View style={{ flex: 1, backgroundColor: c.background, paddingTop: insets.top }}>
+  return <View style={{ flex: 1, backgroundColor: c.background, paddingTop: insets.top }}><OfflineBanner/>
     <View style={{ backgroundColor: c.surface, borderBottomWidth: 1, borderColor: c.line, paddingHorizontal: 16, paddingTop: 12, paddingBottom: 10, gap: 12 }}>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
         <View style={{ gap: 2 }}>
@@ -155,7 +157,7 @@ function ProductCatalog({ initial }: { initial: { q: string; category: string; s
       ItemSeparatorComponent={() => <View style={{ height: 10 }} />} keyboardDismissMode="on-drag" keyboardShouldPersistTaps="handled"
       onScrollBeginDrag={() => setFocused(false)} onEndReached={loadMore} onEndReachedThreshold={.4}
       refreshControl={<RefreshControl refreshing={query.isRefetching && !query.isFetchingNextPage} onRefresh={() => void query.refetch()} tintColor={c.brand} colors={[c.brand]} />}
-      ListHeaderComponent={<View style={{ paddingVertical: 12, gap: 12 }}>
+      ListHeaderComponent={<View style={{ paddingVertical: 12, gap: 12 }}><CachedNotice at={query.data?.pages[0]?.meta?.cachedAt}/>
         {!filters.category && <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 7 }}>
           {categoryRoots(allCategories).map((category) => <Pressable key={category.id} accessibilityRole="button"
             onPress={() => changeFilters({ ...filters, category: category.slug })} style={{ minHeight: 36, borderRadius: 11,

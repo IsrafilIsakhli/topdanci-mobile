@@ -1,3 +1,4 @@
+import { CachedNotice } from '../../../features/catalog/detail-actions';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { Pressable, ScrollView, Text, TextInput, View, useWindowDimensions } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
@@ -195,6 +196,7 @@ export default function Home() {
     <View style={{ gap: 14 }}>
     <HomeSearchBar onSubmit={openSearch} />
     <Pressable accessibilityRole="button" accessibilityLabel="Axtardığım məhsul bölməsini aç" onPress={() => router.push('/requests')} style={{ backgroundColor: c.brandSoft, borderRadius: 17, padding: 15, flexDirection: 'row', alignItems: 'center', gap: 10 }}><View style={{ flex: 1, gap: 4 }}><Text style={{ color: c.brand, fontSize: 14, fontWeight: '800' }}>Axtardığınız məhsulu tapa bilmirsiniz?</Text><Text style={{ color: c.muted, fontSize: 11, lineHeight: 17 }}>Tələb yerləşdirin, satıcı təkliflərini bir yerdə görün.</Text></View><ArrowRight color={c.brand} size={20}/></Pressable>
+    <CachedNotice at={catalog.data?.meta?.cachedAt}/>
     <HomeHero onStores={() => openStores()} />
     <View style={{ gap: 8 }}>
       <SectionHeading title="Kateqoriyalar" onPress={() => setPicker({})} />

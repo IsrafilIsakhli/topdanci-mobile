@@ -1,3 +1,4 @@
+import { OfflineBanner } from '../features/network/connectivity';
 import type { ReactNode } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, View } from 'react-native';
 import { ArrowLeft, Store } from 'lucide-react-native';
@@ -8,7 +9,7 @@ import { PublicBottomNav } from './public-bottom-nav';
 
 export function PublicHeader({ title, back = false, accessory }: { title: string; back?: boolean; accessory?: ReactNode }) {
   const c = useColors(); const router = useRouter();
-  return <View style={{ paddingHorizontal: 16, paddingVertical: 12, flexDirection: 'row', alignItems: 'center', gap: 12,
+  return <><OfflineBanner /><View style={{ paddingHorizontal: 16, paddingVertical: 12, flexDirection: 'row', alignItems: 'center', gap: 12,
     backgroundColor: c.surface, borderBottomColor: c.line, borderBottomWidth: 1 }}>
     {back && <Pressable accessibilityRole="button" accessibilityLabel="Geri" onPress={() => router.canGoBack() ? router.back() : router.replace('/more')}
       style={{ width: 44, minHeight: 44, borderRadius: 14, backgroundColor: c.background, alignItems: 'center', justifyContent: 'center' }}>
@@ -19,7 +20,7 @@ export function PublicHeader({ title, back = false, accessory }: { title: string
       <Text style={{ color: c.ink, fontWeight: '800', fontSize: 22, letterSpacing: -.5 }}>{title}</Text>
     </View>
     {accessory}
-  </View>;
+  </View></>;
 }
 export function PublicPage({ title, back = false, children, scrollKey }: { title: string; back?: boolean; children: ReactNode; scrollKey?: string }) {
   const c = useColors(); const insets = useSafeAreaInsets();

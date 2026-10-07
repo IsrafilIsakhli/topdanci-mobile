@@ -1,3 +1,4 @@
+import { CachedNotice, DetailActions } from '../../../features/catalog/detail-actions';
 import { useLibrary } from '../../../features/buyer/library';
 import { SaveButton } from '../../../features/buyer/save-button';
 import { useEffect, useState } from 'react';
@@ -5,7 +6,7 @@ import { Pressable, ScrollView, Text, View, useWindowDimensions } from 'react-na
 import { useQuery } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ChevronDown, ChevronUp, Package } from 'lucide-react-native';
-import { api } from '../../../api/client';
+import { ApiError, api } from '../../../api/client';
 import type { Product } from '../../../api/types';
 import { CatalogProductCard } from '../../../features/catalog/catalog-product-card';
 import { ContactBar, DetailCard, DetailFrame, DetailState, SupplierCard } from '../../../features/catalog/detail-ui';
@@ -27,7 +28,7 @@ function ProductDetailView({ slug }: { slug: string }) {
   const c = useColors(); const router = useRouter(); const { width, fontScale } = useWindowDimensions();
   const [expanded, setExpanded] = useState(false);
   const query = useQuery({ queryKey: ['product', slug], queryFn: () => api.get<Product>('/products/' + encodeURIComponent(slug)) });
-  const product = query.data?.data;
+  const product = query.error instanceof ApiError && [403,404].includes(query.error.status) ? undefined : query.data?.data;
   const { actions } = useLibrary();
   useEffect(() => { if (product) void actions.viewProduct(product); }, [product, actions]);
   useEffect(() => { if (product?.store?.id) void track('PRODUCT_VIEW', product.store.id, product.id); }, [product?.id, product?.store?.id]);
@@ -47,10 +48,12 @@ function ProductDetailView({ slug }: { slug: string }) {
       onFallback={() => router.push(storePath as never)} /> : undefined}>
     <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled"
       contentContainerStyle={{ padding: 16, paddingBottom: 24, gap: 15 }}>
-      {query.isPending ? <DetailState loading title="Məhsul yüklənir…" /> : query.error ? <DetailState title="Məhsul açılmadı"
+      {query.isPending ? <DetailState loading title="Məhsul yüklənir…" /> : query.error && !product ? <DetailState title="Məhsul açılmadı"
         message={query.error.message} onRetry={() => void query.refetch()} /> : product && terms ? <>
+        <CachedNotice at={query.data?.meta?.cachedAt} />
         <View style={{ padding: 10, backgroundColor: c.surface, borderRadius: 24, borderWidth: 1, borderColor: c.line, gap: 13 }}>
           <ProductGallery product={product} />
+          <DetailActions kind="product" id={product.id} slug={product.slug} name={product.title}/>
           <View style={{ paddingHorizontal: 5, paddingBottom: 6, gap: 11 }}>
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 8 }}>
               {product.category && <Pressable accessibilityRole="button" accessibilityLabel={product.category.name + ' məhsullarına bax'}

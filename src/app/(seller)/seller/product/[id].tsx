@@ -1,3 +1,4 @@
+import { DraftNote, useDraft } from '../../../../features/forms/use-draft';
 import { useState } from 'react';
 import { Alert, Pressable, Text, View } from 'react-native';
 import { ChevronRight, Shapes } from 'lucide-react-native';
@@ -25,6 +26,7 @@ export default function ProductEditor() {
   type Draft = { storeId: string; categoryId: string; title: string; description: string;
     priceType: string; price: string; unit: string; minOrder: string; stockStatus: string };
   const [draft, setDraft] = useState<Partial<Draft>>({});
+  const savedDraft = useDraft('seller-product.' + id, draft, setDraft, {} as Partial<Draft>);
   const [busy, setBusy] = useState(false);
   const [picker, setPicker] = useState(false); const [errors, setErrors] = useState<Record<string, string>>({}); const c = useColors();
   const original = product.data?.data;
@@ -37,7 +39,7 @@ export default function ProductEditor() {
   const unit = draft.unit ?? normalizeUnit(original?.unit);
   const minOrder = draft.minOrder ?? (original?.minOrderQuantity != null ? String(original.minOrderQuantity) : '');
   const stockStatus = draft.stockStatus ?? original?.stockStatus ?? 'IN_STOCK';
-  const setField = (key: keyof Draft) => (value: string) => setDraft((current) => ({ ...current, [key]: value }));
+  const setField = (key: keyof Draft) => (value: string) => { savedDraft.rearm(); setDraft((current) => ({ ...current, [key]: value })); };
   async function save() {
     if (busy) return;
     const next = productDraftErrors({ storeId, categoryId, title, priceType, price, minOrder }); setErrors(next);
@@ -54,7 +56,7 @@ export default function ProductEditor() {
       const response = isNew ? await api.post<Product>('/seller/products', payload) : await api.patch<Product>('/seller/products/' + id, payload);
       await invalidateManagement(qc);
       Alert.alert('Yadda saxlandı', 'Məhsul qaralama kimi saxlanıldı.');
-      setDraft({});
+      await savedDraft.clear(); setDraft({});
       if (isNew) router.replace(('/seller/product/' + response.data.id) as never);
       else void product.refetch();
     } catch (e) { Alert.alert('Xəta', e instanceof Error ? e.message : 'Yenidən cəhd edin.'); }
@@ -88,14 +90,15 @@ export default function ProductEditor() {
     {!isNew && product.isPending ? <Loading /> : !isNew && product.error ? <Notice message={product.error.message} /> : <>
       {original && <View style={{ gap: 10 }}><ProductImage product={original} height={170} marginBottom={0} /><StatusBadge status={original.status} />
         {!!original.reviewNote && <Notice message={'Yoxlama qeydi: ' + original.reviewNote} />}</View>}
+      <DraftNote draft={savedDraft} />
       <Card><Heading>Əsas məlumatlar</Heading>
         <Choice label="Mağaza" value={storeId} onChange={setField('storeId')} options={(stores.data?.data ?? []).map((s) => ({ label: s.name, value: s.id }))} />
         <Pressable accessibilityRole="button" accessibilityLabel="Məhsul kateqoriyasını seç" onPress={() => setPicker(true)}
           style={{ flexDirection: 'row', alignItems: 'center', gap: 10, padding: 12, minHeight: 54, backgroundColor: c.brandSoft, borderRadius: 13 }}>
           <Shapes size={19} color={c.brand} /><Text style={{ flex: 1, color: c.brand, fontSize: 13, fontWeight: '700' }}>{categories.data?.data.find((item) => item.id === categoryId)?.name ?? 'Kateqoriya seçin'}</Text><ChevronRight size={17} color={c.brand} />
         </Pressable>
-        <Field label="Məhsul adı" value={title} onChangeText={setField('title')} error={errors.title} />
-        <Field label="Açıqlama" value={description} onChangeText={setField('description')} multiline />
+        <Field maxLength={160} label="Məhsul adı" value={title} onChangeText={setField('title')} error={errors.title} />
+        <Field maxLength={5000} label="Açıqlama" value={description} onChangeText={setField('description')} multiline />
       </Card>
       <Card><Heading>Qiymət və status</Heading>
         <Choice label="Qiymət növü" value={priceType} onChange={setField('priceType')} options={[

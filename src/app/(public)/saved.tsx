@@ -5,16 +5,19 @@ import { PublicPage, IntroCard } from '../../components/public-page';
 import { FormButton, FormNote } from '../../components/form-ui';
 import { CatalogProductCard } from '../../features/catalog/catalog-product-card';
 import { DirectoryStoreCard } from '../../features/catalog/store-directory';
+import { useSession } from '../../features/auth/use-session';
+import { DEMO_CATALOG } from '../../api/config';
 import { useLibrary } from '../../features/buyer/library';
 import { useColors } from '../../theme/colors';
 export default function Saved() {
   const params = useLocalSearchParams<{ tab?: string }>(); const router = useRouter(); const c = useColors();
   const tab = params.tab === 'stores' ? 'stores' : params.tab === 'recent' ? 'recent' : 'products';
+  const {user}=useSession();
   const { state, actions } = useLibrary(); const { width, fontScale } = useWindowDimensions();
   const cardWidth = width < 350 || fontScale >= 1.3 ? width - 32 : (width - 42) / 2;
   const count = tab === 'products' ? state.products.length : tab === 'stores' ? state.stores.length : state.recent.length;
   return <PublicPage title={tab === 'recent' ? 'Son baxılanlar' : 'Seçilmişlər'} back>
-    <IntroCard eyebrow="SİZİN KATALOQUNUZ" title="Bəyəndikləriniz bir yerdə" text="Məhsul və mağazalar bu cihazda saxlanır. Açarkən ən son məlumatları görəcəksiniz." icon={<Heart color="#fff" size={22} />} />
+    <IntroCard eyebrow="SİZİN KATALOQUNUZ" title="Bəyəndikləriniz bir yerdə" text={user&&!DEMO_CATALOG?'Seçimləriniz hesabınızda saxlanır. Digər cihazdan daxil olanda da buradadır.':'Seçimlərinizi cihazda saxlayın. Hesabınıza daxil olanda məhsul və mağazalar hesabınıza köçürülür.'} icon={<Heart color="#fff" size={22} />} />
     <View style={{ flexDirection: 'row', gap: 7 }}>
       {[{ key: 'products', label: 'Məhsullar', Icon: Package }, { key: 'stores', label: 'Mağazalar', Icon: StoreIcon }, { key: 'recent', label: 'Son baxılan', Icon: History }].map(({ key, label, Icon }) =>
         <Pressable key={key} accessibilityRole="tab" accessibilityState={{ selected: tab === key }} onPress={() => router.setParams({ tab: key })}
@@ -22,6 +25,7 @@ export default function Saved() {
           <Icon size={17} color={tab === key ? c.surface : c.muted} /><Text style={{ color: tab === key ? c.surface : c.ink, fontSize: 11, fontWeight: '700' }}>{label}</Text>
         </Pressable>)}
     </View>
+    {user&&!DEMO_CATALOG&&tab!=='recent'&&<FormNote error={!!state.syncError}>{state.syncError?'Seçimlər cihazdadır. Hesabla yeniləmə alınmadı: '+state.syncError:state.pending.length?'Seçimlər cihazda saxlanır · İnternet olduqda hesabla yenilənəcək':state.syncedAt?'Seçimləriniz hesabla yeniləndi':'Hesabdakı seçimlər yoxlanılır…'}</FormNote>}
     {!!state.error && <FormNote error>{state.error}</FormNote>}
     {!state.ready ? <ActivityIndicator color={c.brand} /> : !count ? <View style={{ padding: 24, gap: 14, alignItems: 'center' }}>
       <Heart size={35} color={c.brand} /><Text style={{ color: c.ink, fontSize: 18, fontWeight: '800' }}>{tab === 'recent' ? 'Baxış tarixçəniz boşdur' : 'Hələ seçim yoxdur'}</Text>

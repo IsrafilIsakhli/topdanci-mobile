@@ -34,6 +34,7 @@ const values: Record<string, string> = {
   DRAFT: 'Qaralama', PENDING_REVIEW: 'Yoxlamada', ACTIVE: 'Aktiv',
   PASSIVE: 'Passiv', REJECTED: 'Rədd edildi', DELETED: 'Silindi',
   PENDING: 'Gözləyir', SUSPENDED: 'Dayandırılıb', IN_REVIEW: 'Yoxlamada',
+  PRODUCT_REPORT: 'Məhsul şikayəti', STORE_REPORT: 'Mağaza şikayəti', SUPPORT_REQUEST: 'Dəstək müraciəti',
   OPEN: 'Açıq', APPROVED: 'Təsdiqləndi',
   RESOLVED: 'Həll edildi', SUPER_ADMIN: 'Baş admin', ADMIN: 'Admin',
   SELLER: 'Satıcı', BUYER: 'Alıcı', FIXED: 'Sabit qiymət',

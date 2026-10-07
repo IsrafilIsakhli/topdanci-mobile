@@ -39,7 +39,7 @@ eas.json development və preview profillərini saxlayır. Expo hesabına girişd
 Emulyatorun yavaşlığı, siyahıların donması və ya keçidlərin ləng olması halında `docs/performance.md` sənədinə baxın. Qısa yol:
 
 - `npm run emu:status` — emulyatorun sürətləndirmə (WHPX), GPU, animasiya və ekran vəziyyətini göstərir.
-- `npm run emu:turbo` — animasiyaları söndürür və fon proseslərini təmizləyir (geri qaytarma: `npm run emu:reset`).
+- `npm run emu:turbo` — animasiyaları standart sürətdə saxlayır və fon proseslərini təmizləyir (geri qaytarma: `npm run emu:reset`).
 - `npm run emu:lowres` — eyni, üstəgəl 720x1600 / 320dpi (emulyatorda ən böyük FPS artımı).
 - `npm run emu:config` — emulyator bağlı ikən AVD `config.ini` faylını optimallaşdırır (ehtiyat nüsxə ilə).
 - `npm run emu:launch` — emulyatoru sürətli flaglarla (`-gpu host -no-audio -no-boot-anim`) başladır.
@@ -52,11 +52,11 @@ Uzun siyahılar (`Məhsullar`, `Mağazalar`, satıcı və admin siyahıları) `F
 - src/app — açıq kataloq, giriş, satıcı və admin ekranları
 - src/api — API tipləri, sorğular, Bearer giriş və token yenilənməsi
 - src/features — kataloq, satıcı yükləməsi və admin məlumatları
-- src/components / src/theme — ortaq telefon interfeysi, işıqlı və tünd rənglər
+- src/components / src/theme — ortaq telefon interfeysi və yalnız işıqlı görünüş
 - src/lib — əlaqə keçidləri və hadisə izləməsi
 - tests — API və sessiya üçün avtomatik yoxlamalar
 
-Refresh token cihazın SecureStore yaddaşında saxlanır; access token yalnız tətbiq yaddaşındadır. Veb tətbiqin cookie/CSRF girişi ayrıca işləyir. Bildirişlər tətbiq daxilində göstərilir; push bildirişləri bu versiyada yoxdur.
+Refresh token cihazın SecureStore yaddaşında saxlanır; access token yalnız tətbiq yaddaşındadır. Veb tətbiqin cookie/CSRF girişi ayrıca işləyir. Bildirişlər tətbiq daxilində göstərilir; push və şifrə bərpasının kodu hazırdır, xidmət ayarları tələb olunur. [Alıcı imkanları və quraşdırma](docs/BUYER_FEATURES.md).
 
 ## Sınaq hesabları
 

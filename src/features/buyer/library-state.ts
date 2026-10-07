@@ -2,8 +2,9 @@ import type { StoreFilters, StoreSort } from '../catalog/store-directory';
 import type { Product, Store } from '../../api/types';
 import { emptyFilters, sortOptions, stockOptions, validateFilters, type ProductFilters, type ProductSort } from '../catalog/product-filters';
 export type Viewed = { kind: 'product'; item: Product; at: number } | { kind: 'store'; item: Store; at: number };
-export type LibraryState = { products: Product[]; stores: Store[]; recent: Viewed[]; searches: string[]; filters: ProductFilters; sort: ProductSort; storeFilters: StoreFilters; storeSort: StoreSort; layout: 'grid' | 'list'; ready: boolean; error: string };
-export function emptyLibrary(): LibraryState { return { products: [], stores: [], recent: [], searches: [], filters: { ...emptyFilters }, sort: 'newest', storeFilters: { city: '', category: '' }, storeSort: 'newest', layout: 'grid', ready: false, error: '' }; }
+export type LibraryChange = { kind: 'product' | 'store'; id: string; saved: boolean; revision: number };
+export type LibraryState = { products: Product[]; stores: Store[]; recent: Viewed[]; searches: string[]; filters: ProductFilters; sort: ProductSort; storeFilters: StoreFilters; storeSort: StoreSort; layout: 'grid' | 'list'; ready: boolean; error: string; pending: LibraryChange[]; cloudInitialized: boolean; syncError: string; syncedAt?: number };
+export function emptyLibrary(): LibraryState { return { products: [], stores: [], recent: [], searches: [], filters: { ...emptyFilters }, sort: 'newest', storeFilters: { city: '', category: '' }, storeSort: 'newest', layout: 'grid', ready: false, error: '', pending: [], cloudInitialized: false, syncError: '' }; }
 const str = (value: unknown, max = 160) => typeof value === 'string' ? value.slice(0, max) : '';
 export function storeSnapshot(value: unknown): Store | null {
   if (!value || typeof value !== 'object') return null;
@@ -48,6 +49,9 @@ export function parseLibrary(raw: string | null): LibraryState {
       return [];
     });
     next.searches = [...new Set((Array.isArray(data.searches) ? data.searches : []).map((v: unknown) => str(v, 120).trim()).filter(Boolean))].slice(0, 8) as string[];
+    next.pending = (Array.isArray(data.pending) ? data.pending : []).filter((v: LibraryChange) => v && ['product','store'].includes(v.kind) && typeof v.id === 'string' && v.id.length <= 160 && typeof v.saved === 'boolean' && Number.isFinite(v.revision)).slice(0,10000);
+    next.cloudInitialized = data.cloudInitialized === true;
+    next.syncedAt = Number.isFinite(data.syncedAt) ? data.syncedAt : undefined;
     next.filters = rememberedFilters(data.filters);
     next.storeFilters = { city: str(data.storeFilters?.city, 80), category: str(data.storeFilters?.category, 120) };
     next.storeSort = ['newest','popular','products'].includes(data.storeSort) ? data.storeSort : 'newest';

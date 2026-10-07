@@ -2,7 +2,7 @@ export type UserRole = 'BUYER' | 'SELLER' | 'ADMIN' | 'SUPER_ADMIN';
 export type SessionUser = {
   id: string; role: UserRole; status: string; email?: string; phone?: string;
 };
-export type ApiEnvelope<T> = { data: T; meta?: { nextCursor?: string | null; total?: number; unreadCount?: number } };
+export type ApiEnvelope<T> = { data: T; meta?: { nextCursor?: string | null; total?: number; unreadCount?: number; cachedAt?: string } };
 export type Category = { id: string; slug: string; name: string; parentId?: string | null; productCount?: number };
 export type Store = {
   id: string; slug: string; name: string; legalName?: string | null; description?: string | null;

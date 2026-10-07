@@ -4,9 +4,11 @@ const auth = vi.hoisted(() => ({
   getAccessToken: vi.fn<() => string | null>(),
   refreshAccess: vi.fn<() => Promise<string | null>>(),
 }));
+vi.mock('@react-native-async-storage/async-storage',()=>({default:{getItem:async()=>null,setItem:async()=>undefined}}));
 vi.mock('../src/api/auth-store', () => auth);
 vi.mock('../src/api/config', () => ({ API_BASE_URL: 'http://api.test/api/v1', DEMO_CATALOG: false }));
 
+import { readPublicCache,writePublicCache } from '../src/features/network/public-cache';
 import { ApiError, request, withParams } from '../src/api/client';
 
 beforeEach(() => {
@@ -43,6 +45,8 @@ describe('API client', () => {
     } satisfies Partial<ApiError>);
   });
 
+  it('uses the previously loaded public product during an outage',async()=>{await writePublicCache('/products/cached',{data:{id:'cached'}});vi.stubGlobal('fetch',vi.fn().mockRejectedValue(new TypeError('offline')));const response=await request('/products/cached');expect(response.meta?.cachedAt).toBeTruthy();});
+  it('removes a deleted public product from the persistent cache',async()=>{await writePublicCache('/products/deleted',{data:{id:'deleted'}});vi.stubGlobal('fetch',vi.fn().mockResolvedValue(new Response('{}',{status:404})));await expect(request('/products/deleted')).rejects.toMatchObject({status:404});expect(await readPublicCache('/products/deleted')).toBeNull();});
   it('reports an offline request', async () => {
     vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new TypeError('offline')));
     await expect(request('/products')).rejects.toMatchObject({ status: 0 });

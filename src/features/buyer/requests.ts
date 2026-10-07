@@ -1,11 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SecureStore from 'expo-secure-store';
-import { api } from '../../api/client';
+import { ApiError, api } from '../../api/client';
 import { getAuthSnapshot } from '../../api/auth-store';
 import { DEMO_CATALOG } from '../../api/config';
 import type { Store } from '../../api/types';
 export type BuyerOffer={id:string;price?:number|string|null;message:string;store:Store;updatedAt:string};
-export type BuyerRequest={id:string;title:string;quantity:number|string;unit:string;city:string;category?:string;description?:string;status:'ACTIVE'|'CLOSED';createdAt:string;expiresAt:string;_count:{offers:number};offers?:BuyerOffer[]};
+export type BuyerRequest={id:string;title:string;quantity:number|string;unit:string;city:string;category?:string;description?:string;status:'ACTIVE'|'CLOSED';createdAt:string;expiresAt:string;_count:{offers:number};offers?:BuyerOffer[];owned?:boolean};
 export type RequestDraft={title:string;quantity:number;unit:string;city:string;category?:string;description?:string};
 export const units=['ədəd','cüt','kq','metr','qutu','palet','dəst','litr'];
 export function requestErrors(draft:RequestDraft){
@@ -26,7 +26,7 @@ export async function requestToken(id:string){const key=tokenKey(id,scope());ret
 async function remember(id:string,token:string,owner:string){
  const key=tokenKey(id,owner);tokenCache.set(key,token);memoryIds.set(owner,[id,...(memoryIds.get(owner)??[]).filter(v=>v!==id)]);
  await SecureStore.setItemAsync(key,token);
- const ids=JSON.parse(await AsyncStorage.getItem(indexKey(owner))??'[]') as string[];
+ const parsed=JSON.parse(await AsyncStorage.getItem(indexKey(owner))??'[]'); const ids=Array.isArray(parsed)?parsed.filter(v=>typeof v==='string'):[];
  await AsyncStorage.setItem(indexKey(owner),JSON.stringify([id,...ids.filter(v=>v!==id)].slice(0,100)));
 }
 let writes=Promise.resolve();
@@ -46,9 +46,13 @@ export async function listRequests(params:{q?:string;city?:string;category?:stri
 }
 export async function getRequest(id:string,manage=true){
  const token=manage?await requestToken(id):null;
+ if(!DEMO_CATALOG && manage && getAuthSnapshot()) {
+  try { return await api.get<BuyerRequest>('/buyer-requests/'+encodeURIComponent(id)+'/owned'); }
+  catch(e) { if(!(e instanceof ApiError) || e.status!==404) throw e; }
+ }
  if(!DEMO_CATALOG)return token?api.post<BuyerRequest>('/buyer-requests/'+encodeURIComponent(id)+'/manage',{token}):api.get<BuyerRequest>('/buyer-requests/'+encodeURIComponent(id));
  const item=(await demoItems()).find(r=>r.id===id);if(!item)throw new Error('Tələb tapılmadı.');
- return {data:token?item:{...item,offers:undefined}};
+ return {data:token?{...item,owned:true}:{...item,offers:undefined}};
 }
 export async function createRequest(draft:RequestDraft){
  const owner=scope();let item:BuyerRequest;let token:string;
@@ -61,8 +65,28 @@ export async function createRequest(draft:RequestDraft){
  try{await remember(item.id,token,owner);}catch{return {...item,storageWarning:'Tələb yaradıldı, amma idarə açarı cihazda saxlanmadı. Tətbiqi bağlamadan təklifləri izləyin və ya tələbi bağlayın.'};}return {...item,storageWarning:''};
 }
 export async function closeRequest(id:string){
+ if(!DEMO_CATALOG&&getAuthSnapshot()){ try { await api.post('/buyer-requests/'+encodeURIComponent(id)+'/owned/close',{});return; } catch(e){if(!(e instanceof ApiError)||e.status!==404)throw e;} }
  const token=await requestToken(id);if(!token)throw new Error('Bu tələbi yalnız sahibi bağlaya bilər.');
  if(DEMO_CATALOG)await changeDemo(items=>items.map(r=>r.id===id?{...r,status:'CLOSED'}:r));else await api.post('/buyer-requests/'+encodeURIComponent(id)+'/close',{token});
+}
+export async function listOwnRequests(cursor = '') {
+ if(!DEMO_CATALOG&&getAuthSnapshot()) return api.get<BuyerRequest[]>('/buyer-requests/mine',{cursor,limit:20});
+ const ids=await ownRequestIds();const data=await Promise.all(ids.slice(Number(cursor)||0,(Number(cursor)||0)+20).map(async id=>(await getRequest(id)).data));
+ return {data,meta:{nextCursor:(Number(cursor)||0)+20<ids.length?String((Number(cursor)||0)+20):null}};
+}
+export async function migrateGuestRequests(){
+ const user=getAuthSnapshot();if(!user)return;
+ const owner=scope(),guest=(DEMO_CATALOG?'demo':'live')+':guest';let parsed:unknown;try{parsed=JSON.parse(await AsyncStorage.getItem(indexKey(guest))??'[]');}catch{return;}if(!Array.isArray(parsed))return;
+ for(const id of parsed.filter(v=>typeof v==='string').slice(0,100)){
+  if(getAuthSnapshot()?.id!==user.id)return;
+  const token=await SecureStore.getItemAsync(tokenKey(id,guest));if(!token)continue;
+  if(!DEMO_CATALOG){try{await api.post('/buyer-requests/'+encodeURIComponent(id)+'/claim',{token});}catch(e){if(e instanceof ApiError&&(e.status===403||e.status===404))continue;throw e;}}
+  await remember(id,token,owner);
+  await SecureStore.deleteItemAsync(tokenKey(id,guest)); tokenCache.delete(tokenKey(id,guest));
+  const current=JSON.parse(await AsyncStorage.getItem(indexKey(guest))??'[]');
+  await AsyncStorage.setItem(indexKey(guest),JSON.stringify(Array.isArray(current)?current.filter(v=>v!==id):[]));
+  memoryIds.set(guest,(memoryIds.get(guest)??[]).filter(v=>v!==id));
+ }
 }
 export async function sendOffer(id:string,store:Store,price:number|undefined,message:string){
  if(!DEMO_CATALOG)return api.post('/buyer-requests/'+encodeURIComponent(id)+'/offers',{storeId:store.id,...(price!==undefined?{price}:{}),message});

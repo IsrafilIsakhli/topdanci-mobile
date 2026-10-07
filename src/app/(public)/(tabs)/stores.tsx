@@ -1,3 +1,4 @@
+import { CachedNotice } from '../../../features/catalog/detail-actions';
 import { useLibrary } from '../../../features/buyer/library';
 import { SearchPanel } from '../../../features/buyer/search-panel';
 import { useEffect, useCallback, useMemo, useRef, useState } from 'react';
@@ -114,7 +115,7 @@ function StoreDirectory({ initial }: { initial: { q: string; city: string; categ
       contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 24 }} ItemSeparatorComponent={() => <View style={{ height: 14 }} />} showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag" onEndReached={loadMore} onEndReachedThreshold={.4}
       refreshControl={<RefreshControl refreshing={query.isRefetching && !query.isFetchingNextPage} onRefresh={() => void query.refetch()} colors={[c.brand]} tintColor={c.brand} />}
-      ListHeaderComponent={<View style={{ paddingVertical: 16, gap: 10 }}>
+      ListHeaderComponent={<View style={{ paddingVertical: 16, gap: 10 }}><CachedNotice at={query.data?.pages[0]?.meta?.cachedAt}/>
         <View style={{ padding: 15, borderRadius: 18, backgroundColor: c.brandSoft, gap: 5 }}>
           <Text style={{ color: c.brand, fontSize: 17, lineHeight: 23, fontWeight: '800' }}>Doğru təchizatçı, birbaşa əlaqə.</Text>
           <Text style={{ color: c.muted, fontSize: 12, lineHeight: 18 }}>Mağazaları müqayisə edin, məhsullarını kəşf edin.</Text>

@@ -19,6 +19,7 @@ export default function Account() {
     {session.loading ? <ActivityIndicator color={c.brand} style={{ paddingVertical: 30 }} /> : !session.user ? <>
       <IntroCard title="Hesabınıza daxil olun" text="Hesab və mağaza idarəetməsi üçün giriş edin." icon={<UserRound color="#ffffff" size={22} />} />
       <FormButton title="Daxil ol" onPress={() => router.push('/login')} />
+      <BuyerMenu />
       <MenuItem icon={<HelpCircle color={c.brand} size={21} />} title="Dəstək və əlaqə" text="Girişlə bağlı kömək alın" onPress={() => router.push('/support')} />
     </> : <AccountDetails key={session.user.id} user={session.user} session={session} />}
   </PublicPage>;

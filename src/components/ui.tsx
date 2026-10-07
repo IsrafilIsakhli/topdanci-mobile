@@ -1,3 +1,4 @@
+import { OfflineBanner } from '../features/network/connectivity';
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { ActivityIndicator, FlatList, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View, type ViewStyle } from 'react-native';
 import { Image } from 'expo-image';
@@ -39,6 +40,7 @@ export function Screen<T>({ title, eyebrow, children, mode = 'public', back = fa
     {children}
   </>;
   return <View style={{ flex: 1, backgroundColor: c.background, paddingTop: insets.top }}>
+    <OfflineBanner />
     <View style={[styles.header, { backgroundColor: c.surface, borderBottomColor: c.line }]}>
       {headerContent ?? <>
       {back && <Pressable accessibilityRole="button" accessibilityLabel="Geri"

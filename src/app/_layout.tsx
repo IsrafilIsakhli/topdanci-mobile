@@ -1,3 +1,5 @@
+import { ConnectivityBridge } from '../features/network/connectivity';
+import { LibraryBridge } from '../features/buyer/library';
 import { PushBridge } from '../features/buyer/push';
 import { Stack } from 'expo-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -19,7 +21,7 @@ export default function RootLayout() {
     return subscribeAuth(() => { const next = identity(); if (next !== id) { id = next; queryClient.clear(); } });
   }, []);
   return <SafeAreaProvider><QueryClientProvider client={queryClient}>
-    <PushBridge />
+    <ConnectivityBridge /><LibraryBridge /><PushBridge />
     <StatusBar style="dark" />
     <Stack screenOptions={{ headerShown: false, animation: reduced ? 'none' : 'fade', animationDuration: 180, contentStyle: { backgroundColor: c.background } }} />
   </QueryClientProvider></SafeAreaProvider>;

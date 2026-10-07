@@ -1,3 +1,4 @@
+import { DraftNote, useDraft } from '../../features/forms/use-draft';
 import { useRef, useState } from 'react';
 import { Keyboard, Pressable, Text, View } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
@@ -16,6 +17,7 @@ export default function OpenStore() {
   const c = useColors(); const router = useRouter();
   const categories = useQuery({ queryKey: ['categories'], queryFn: () => api.get<Category[]>('/categories') });
   const [form, setForm] = useState({ ...emptyApplication }); const [step, setStep] = useState(1);
+  const draft = useDraft('store-application', form, setForm, { ...emptyApplication });
   const [errors, setErrors] = useState<FormErrors>({}); const [message, setMessage] = useState('');
   const [busy, setBusy] = useState(false); const lock = useRef(false); const [sent, setSent] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
@@ -33,11 +35,12 @@ export default function OpenStore() {
     }
     if (DEMO_CATALOG) { setMessage('Forma düzgündür. Nümunə rejimində müraciət göndərilmir; məlumatlarınız formadadır.'); return; }
     lock.current = true; setBusy(true);
-    try { await api.post('/stores/applications', applicationPayload(form)); setSent(true); setForm({ ...emptyApplication }); }
+    try { await api.post('/stores/applications', applicationPayload(form)); setSent(true); await draft.clear(); setForm({ ...emptyApplication }); }
     catch (error) { setMessage(error instanceof Error ? error.message : 'Müraciət göndərilmədi. Yenidən yoxlayın.'); }
     finally { lock.current = false; setBusy(false); }
   }
   return <PublicPage title="Mağaza aç" back scrollKey={sent ? 'sent' : String(step)}>
+    {!sent && <DraftNote draft={draft} />}
     {sent ? <FormSection title="Müraciətiniz göndərildi">
       <CheckCircle2 size={42} color={c.brand} /><Text style={{ color: c.muted, fontSize: 13, lineHeight: 20 }}>Komandamız mağaza məlumatlarını yoxlayacaq və göstərdiyiniz əlaqə vasitəsi ilə sizinlə əlaqə saxlayacaq.</Text>
       <FormButton title="Mağazalara bax" onPress={() => router.replace('/stores')} />

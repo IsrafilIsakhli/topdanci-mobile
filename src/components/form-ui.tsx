@@ -5,7 +5,7 @@ import { useColors } from '../theme/colors';
 
 export function FormSection({ title, subtitle, children }: { title: string; subtitle?: string; children: ReactNode }) {
   const c = useColors();
-  return <View style={{ borderRadius: 20, padding: 16, borderWidth: 1, borderColor: c.line, backgroundColor: c.surface, gap: 16 }}>
+  return <View style={{ borderRadius: 22, padding: 18, borderWidth: 1, borderColor: c.line, backgroundColor: c.surface, gap: 16 }}>
     <View style={{ gap: 4 }}><Text style={{ color: c.ink, fontSize: 16, fontWeight: '800' }}>{title}</Text>
       {subtitle && <Text style={{ color: c.muted, fontSize: 12, lineHeight: 18 }}>{subtitle}</Text>}</View>
     {children}
@@ -24,7 +24,7 @@ export function FormInput({ label, error, hint, optional, secureTextEntry, multi
         autoCapitalize={props.autoCapitalize ?? 'none'} autoCorrect={props.autoCorrect ?? false}
         secureTextEntry={secureTextEntry && !show} multiline={multiline}
         onFocus={(event) => { setFocused(true); props.onFocus?.(event); }} onBlur={(event) => { setFocused(false); props.onBlur?.(event); }}
-        style={{ flex: 1, minHeight: multiline ? 122 : 48, color: c.ink, fontSize: 14, paddingHorizontal: 12,
+        style={{ flex: 1, minHeight: multiline ? 122 : 48, color: c.ink, fontSize: 16, paddingHorizontal: 12,
           paddingVertical: 12, textAlignVertical: multiline ? 'top' : 'center' }} />
       {secureTextEntry && <Pressable accessibilityRole="button" accessibilityLabel={show ? label + ': şifrəni gizlət' : label + ': şifrəni göstər'}
         accessibilityState={{ selected: show, disabled: props.editable === false }} disabled={props.editable === false} onPress={() => setShow(!show)}

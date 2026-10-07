@@ -1,3 +1,4 @@
+import { OfflineBanner } from '../network/connectivity';
 import { SaveButton } from '../buyer/save-button';
 import { useState, type ReactNode } from 'react';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
@@ -15,6 +16,7 @@ import { availableContacts, storeAddress, storeHours } from './detail-data';
 export function DetailFrame({ title, fallback, children, footer, accessory }: { title: string; fallback: '/products' | '/stores'; children: ReactNode; footer?: ReactNode; accessory?: ReactNode }) {
   const c = useColors(); const router = useRouter(); const insets = useSafeAreaInsets();
   return <View style={{ flex: 1, paddingTop: insets.top, backgroundColor: c.background }}>
+    <OfflineBanner />
     <View style={{ paddingHorizontal: 16, paddingVertical: 10, backgroundColor: c.surface, borderBottomWidth: 1, borderColor: c.line,
       flexDirection: 'row', alignItems: 'center', gap: 12 }}>
       <Pressable accessibilityRole="button" accessibilityLabel="Geri" onPress={() => router.canGoBack() ? router.back() : router.replace(fallback)}

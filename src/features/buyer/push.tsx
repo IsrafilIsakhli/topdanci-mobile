@@ -58,7 +58,7 @@ export function PushBridge(){
 export function PushSettings(){
  const {user}=useSession(),[message,setMessage]=useState(''),[busy,setBusy]=useState(false),[enabled,setEnabled]=useState(false);const lock=useRef(false);
  const status=useQuery({queryKey:['push-status',user?.id],enabled:!!user&&!DEMO_CATALOG&&!!projectId,queryFn:()=>api.get<{configured:boolean;devices:number}>('/notifications/push/status')});
- useEffect(()=>{if(user)void SecureStore.getItemAsync(preferenceKey(user.id)).then(v=>setEnabled(v==='true'));},[user]);
+ useEffect(()=>{let disposed=false;if(user)void SecureStore.getItemAsync(preferenceKey(user.id)).then(v=>{if(!disposed&&getAuthSnapshot()?.id===user.id)setEnabled(v==='true');}).catch(()=>undefined);return()=>{disposed=true;};},[user]);
  async function toggle(){
  if(!user||lock.current)return;lock.current=true;setBusy(true);setMessage('');
  try{

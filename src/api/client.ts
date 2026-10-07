@@ -1,3 +1,5 @@
+import { forgetPublicCache, publicCachePath, readPublicCache, writePublicCache } from '../features/network/public-cache';
+import { isConnected } from '../features/network/network-state';
 import { API_BASE_URL, DEMO_CATALOG } from './config';
 import { getAccessToken, getAuthSnapshot, refreshAccess } from './auth-store';
 import type { ApiEnvelope } from './types';
@@ -44,6 +46,7 @@ export async function request<T>(path: string, options: Options = {}): Promise<A
   if (DEMO_CATALOG) throw new ApiError('Bu əməliyyat yalnız canlı rejimdə işləyir. Test məlumatı serverə göndərilmir.', 400);
   let response: Response;
   try {
+    if (!isConnected()) throw new Error('offline');
     const token = getAccessToken();
     response = await send(path, options, token);
     if (response.status === 401 && token) {
@@ -51,11 +54,20 @@ export async function request<T>(path: string, options: Options = {}): Promise<A
       if (replacement) response = await send(path, options, replacement);
     }
   } catch {
+    if ((!options.method || options.method === 'GET') && publicCachePath(path)) {
+      const cached = await readPublicCache<T>(withParams(path, options.params)); if (cached) return cached;
+    }
     throw new ApiError('Serverlə əlaqə yoxdur. İnterneti və API ünvanını yoxlayın.', 0);
   }
   const payload = await response.json().catch(() => null) as ApiEnvelope<T> & { error?: { message?: string }; requestId?: string } | null;
+  if (!response.ok && (!options.method || options.method==='GET') && publicCachePath(path)) {
+    const url=withParams(path,options.params);
+    if(response.status===404||response.status===403)void forgetPublicCache(url);
+    if(response.status>=500){const cached=await readPublicCache<T>(url);if(cached)return cached;}
+  }
   if (!response.ok) throw new ApiError(payload?.error?.message ?? 'Sorğu yerinə yetirilmədi.', response.status, payload?.requestId);
   if (!payload || !('data' in payload)) throw new ApiError('Server cavabı gözlənilən formada deyil.', response.status);
+  if ((!options.method || options.method === 'GET') && publicCachePath(path)) void writePublicCache(withParams(path, options.params), payload);
   return payload;
 }
 export const api = {

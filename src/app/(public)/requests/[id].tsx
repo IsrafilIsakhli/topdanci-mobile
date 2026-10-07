@@ -34,7 +34,7 @@ export default function RequestDetail(){
  <RequestCard item={item}/>
  {!!item.description&&<FormSection title="Alıcının qeydi"><Text style={{color:c.ink,fontSize:14,lineHeight:22}}>{item.description}</Text></FormSection>}
  <Text style={{color:c.muted,fontSize:12}}>Son tarix: {new Date(item.expiresAt).toLocaleDateString('az')}</Text>
- {token.data?<FormSection title={'Təkliflər · '+(item.offers?.length??0)} subtitle="Bu məlumatlar yalnız tələbin sahibinə görünür.">
+ {(token.data||item.owned)?<FormSection title={'Təkliflər · '+(item.offers?.length??0)} subtitle="Bu məlumatlar yalnız tələbin sahibinə görünür.">
  {!item.offers?.length?<FormNote>Hələ təklif yoxdur. Bu səhifəni yeniləyərək yeni təklifləri görə bilərsiniz.</FormNote>:item.offers.map(o=><FormSection key={o.id} title={o.store.name} subtitle={o.store.city}>
  <Text style={{color:c.brand,fontSize:18,fontWeight:'800'}}>{o.price!=null?o.price+' AZN':'Razılaşma yolu ilə'}</Text><Text style={{color:c.ink,lineHeight:21}}>{o.message}</Text><FormButton secondary title="Mağazaya keç və əlaqə saxla" onPress={()=>router.push('/store/'+o.store.slug as never)}/></FormSection>)}
  <FormButton secondary title="Təklifləri yenilə" busy={query.isFetching} onPress={()=>void query.refetch()}/>
@@ -48,7 +48,7 @@ export default function RequestDetail(){
  {!!feedback&&<FormNote error={failed}>{feedback}</FormNote>}
  <FormButton title="Təklifi göndər" busy={busy} onPress={()=>void offer()}/></>}
  </FormSection>:<FormNote>Təklif vermək üçün satıcı hesabına daxil olun.</FormNote>)}
- {!token.data&&!user&&<FormButton secondary title="Satıcı kimi daxil ol" onPress={()=>router.push('/login')}/>}
+ {!token.data&&!item.owned&&!user&&<FormButton secondary title="Satıcı kimi daxil ol" onPress={()=>router.push('/login')}/>}
  </>}
 
  </PublicPage>;

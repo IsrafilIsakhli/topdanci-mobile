@@ -1,3 +1,4 @@
+import { DraftNote, useDraft } from '../../features/forms/use-draft';
 import { useRef, useState } from 'react';
 import { Keyboard, Pressable, Text, View } from 'react-native';
 import { CheckCircle2, MessageCircle } from 'lucide-react-native';
@@ -12,6 +13,7 @@ import { useColors } from '../../theme/colors';
 export default function Support() {
   const c = useColors(); const router = useRouter();
   const [form, setForm] = useState({ ...emptySupport }); const [errors, setErrors] = useState<FormErrors>({});
+  const draft = useDraft('support', form, setForm, { ...emptySupport });
   const [busy, setBusy] = useState(false); const lock = useRef(false); const [sent, setSent] = useState(false);
   const [message, setMessage] = useState('');
   const update = (field: keyof SupportForm, value: string) => {
@@ -23,15 +25,16 @@ export default function Support() {
     if (Object.keys(next).length) return;
     if (DEMO_CATALOG) { setMessage('Forma düzgündür. Nümunə rejimində mesaj göndərilmir; yazdıqlarınız formadadır.'); return; }
     lock.current = true; setBusy(true);
-    try { await api.post('/support/requests', supportPayload(form)); setSent(true); setForm({ ...form, message: '' }); }
+    try { await api.post('/support/requests', supportPayload(form)); setSent(true); await draft.clear(); setForm({ ...form, message: '' }); }
     catch (error) { setMessage(error instanceof Error ? error.message : 'Mesaj göndərilmədi. Yenidən yoxlayın.'); }
     finally { lock.current = false; setBusy(false); }
   }
   return <PublicPage title="Dəstək və əlaqə" back scrollKey={sent ? 'sent' : 'form'}>
+    {!sent && <DraftNote draft={draft} />}
     {sent ? <FormSection title="Mesajınız qeydə alındı">
       <CheckCircle2 size={42} color={c.brand} /><Text style={{ color: c.muted, fontSize: 13, lineHeight: 20 }}>Müraciətinizi göstərdiyiniz əlaqə məlumatları ilə cavablandıracağıq.</Text>
       <FormButton title="Hesab bölməsinə qayıt" onPress={() => router.replace('/more')} />
-      <FormButton title="Yeni mesaj yaz" secondary onPress={() => { setSent(false); setMessage(''); }} />
+      <FormButton title="Yeni mesaj yaz" secondary onPress={() => { draft.rearm(); setSent(false); setMessage(''); }} />
     </FormSection> : <>
       <View style={{ gap: 9 }}><MessageCircle size={28} color={c.brand} /><Text style={{ color: c.ink, fontSize: 23, fontWeight: '800' }}>Sizi dinləyirik</Text>
         <Text style={{ color: c.muted, fontSize: 12, lineHeight: 19 }}>Sualınızı, təklifinizi və ya qarşılaşdığınız problemi bizə yazın.</Text></View>

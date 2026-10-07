@@ -1,3 +1,4 @@
+import { CachedNotice, DetailActions } from '../../../features/catalog/detail-actions';
 import { useLibrary } from '../../../features/buyer/library';
 import { SaveButton } from '../../../features/buyer/save-button';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -5,7 +6,7 @@ import { ActivityIndicator, FlatList, Keyboard, Pressable, RefreshControl, Text,
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowDownUp, ArrowRight, BadgeCheck, MapPin, Package, Search, X } from 'lucide-react-native';
-import { api } from '../../../api/client';
+import { ApiError, api } from '../../../api/client';
 import { DEMO_CATALOG } from '../../../api/config';
 import type { Product, Store } from '../../../api/types';
 import { RemoteImage } from '../../../components/ui';
@@ -63,7 +64,7 @@ function StoreProfile({ slug }: { slug: string }) {
   const [text, setText] = useState(''); const [q, setQ] = useState(''); const [sort, setSort] = useState<ProductSort>('newest'); const [sortOpen, setSortOpen] = useState(false);
   const list = useRef<FlatList<Product>>(null);
   const query = useQuery({ queryKey: ['store', slug], queryFn: () => api.get<Store>('/stores/' + encodeURIComponent(slug)) });
-  const store = query.data?.data;
+  const store = query.error instanceof ApiError && [403,404].includes(query.error.status) ? undefined : query.data?.data;
   const { actions } = useLibrary();
   useEffect(() => { if (store) void actions.viewStore(store); }, [store, actions]);
   useEffect(() => { if (store?.id) void track('STORE_VIEW', store.id); }, [store?.id]);
@@ -82,7 +83,7 @@ function StoreProfile({ slug }: { slug: string }) {
   const submit = (value = text) => { const next = value.trim().slice(0, 120); setText(next); setQ(next); Keyboard.dismiss(); };
   return <DetailFrame title="Mağaza profili" fallback="/stores" accessory={store ? <SaveButton store={store} /> : undefined}
     footer={store ? <ContactBar store={store} fallbackLabel="Məhsullara bax" onFallback={() => router.push(fullCatalog as never)} /> : undefined}>
-    {query.isPending ? <DetailState loading title="Mağaza yüklənir…" /> : query.error ?
+    {query.isPending ? <DetailState loading title="Mağaza yüklənir…" /> : query.error && !store ?
       <DetailState title="Mağaza açılmadı" message={query.error.message} onRetry={() => void query.refetch()} /> : store ? <>
       <FlatList ref={list} key={columns} data={items} numColumns={columns} keyExtractor={(item) => item.id}
         renderItem={({ item }) => <CatalogProductCard product={item} width={cardWidth} />}
@@ -93,7 +94,7 @@ function StoreProfile({ slug }: { slug: string }) {
         refreshControl={<RefreshControl refreshing={query.isRefetching || (products.isRefetching && !products.isFetchingNextPage)}
           onRefresh={() => { void query.refetch(); void products.refetch(); }} colors={[c.brand]} tintColor={c.brand} />}
         ListHeaderComponent={<View style={{ gap: 14, paddingBottom: 14 }}>
-          <StoreIdentity store={store} />
+          <CachedNotice at={query.data?.meta?.cachedAt}/><StoreIdentity store={store} /><DetailActions kind="store" id={store.id} slug={store.slug} name={store.name}/>
           <StoreAbout store={store} />
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
             <Text style={{ color: c.ink, fontSize: 19, fontWeight: '800', flex: 1 }}>Mağazanın məhsulları</Text>
