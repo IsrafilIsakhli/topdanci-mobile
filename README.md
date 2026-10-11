@@ -10,7 +10,7 @@ Tətbiqi üç tərəf üçün hazırlayırıq: alıcılar, mağaza sahibləri v�
 
 **iOS və Android · Azərbaycan dilində · İşıqlı görünüş**
 
-[Ekranlar](#ekranlar) · [İmkanlar](#imkanlar) · [Quraşdırma](#quraşdırma) · [Sənədlər](#sənədlər)
+[Ekranlar](#ekranlar) · [İmkanlar](#i%CC%87mkanlar) · [Quraşdırma](#quraşdırma) · [Sənədlər](#sənədlər)
 
 ## Ekranlar
 
