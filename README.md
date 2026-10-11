@@ -1,63 +1,195 @@
-# TopdanBazar mobil tətbiqi
+<p align="center">
+  <img src="docs/images/cover.webp" alt="TopdanBazar — mobil tətbiqin ana səhifəsi, məhsullar və kateqoriya seçimi" width="100%">
+</p>
 
-Android və iPhone üçün Expo / React Native tətbiqi. Alıcı, satıcı və admin eyni tətbiqdən istifadə edir. İnkişaf rejimində nümunə kataloq açılır; canlı rejimdə məlumatlar mövcud TopdanBazar API-sindən alınır.
+# TopdanBazar
 
-## Başlama
+Azərbaycanın topdansatış bazarı üçün mobil tətbiq. Alıcı məhsulları və mağazaları araşdırır, qiymət və minimum sifariş şərtlərinə baxır, satıcı ilə WhatsApp və ya telefon vasitəsilə əlaqə saxlayır.
 
-1. Bu qovluqda npm install işlədin.
-2. .env.example faylını .env kimi köçürün və EXPO_PUBLIC_API_BASE_URL dəyərini qurun. Şəkillərin media açarları ilə gəlməsi halında EXPO_PUBLIC_CDN_BASE_URL ünvanını da saytın istifadə etdiyi CDN ünvanına uyğun yazın.
-3. Nümunə məhsul və mağazalara baxmaq üçün API, PostgreSQL və Redis tələb olunmur. Android virtual cihazını açın və `npx expo start --dev-client` işlədib terminalda `a` basın. İlk quraşdırma üçün bir dəfə `npx expo run:android` lazımdır.
-4. Canlı məlumat, giriş və satıcı/admin əməliyyatlarını yoxlamaq üçün `.env` daxilində `EXPO_PUBLIC_DEMO_CATALOG=false` yazın və API, PostgreSQL və Redis xidmətlərini başladın. Mobil giriş üçün API-də /auth/mobile/* endpoint-ləri olmalıdır.
+Tətbiqi üç tərəf üçün hazırlayırıq: alıcılar, mağaza sahibləri və platformanı idarə edən komanda. Hazırda inkişaf və sınaq mərhələsindədir.
 
-Nümunə kataloq yalnız development rejimində işləyir. Məhsul fotoları yerli fayllardır. Nümunə mağazaların əlaqə düymələri zəng və mesaj açmır, real lead hadisəsi göndərmir. Mağaza və dəstək müraciətləri demo rejimində serverə göndərilmir. Test mağaza admini və superadmin panelləri API olmadan işləyir; [girişlər və panel təlimatı](docs/ADMIN_PANELS.md). `.env` dəyişəndən sonra Metro serverini yenidən başladın.
+**iOS və Android · Azərbaycan dilində · İşıqlı görünüş**
 
-Telefon üçün localhost kompüteri göstərmir. Kompüter və telefon eyni Wi-Fi şəbəkəsindədirsə, .env daxilində kompüterin LAN IP ünvanını yazın (məsələn, http://192.168.1.10:4000/api/v1). API həmin ünvanı dinləməli, Windows firewall girişə icazə verməlidir. iPhone-da lokal HTTP ünvanı məhdudlaşdırıla bilər; sabit HTTPS ünvanı ən etibarlı seçimdir. Canlı API ünvanı hazır olanda .env dəyərini onunla dəyişin. EXPO_PUBLIC_* dəyərləri tətbiqdə görünə bilər; bura parol və ya məxfi açar yazmayın.
+[Ekranlar](#ekranlar) · [İmkanlar](#imkanlar) · [Quraşdırma](#quraşdırma) · [Sənədlər](#sənədlər)
 
-## iPhone-da QR ilə test
+## Ekranlar
 
-1. iPhone-da Expo Go-nun son versiyasını quraşdırın. Layihə Expo SDK 57 istifadə edir.
-2. Kompüterdə bu qovluqda `npx expo login --browser` işlədin. iPhone-dakı Expo Go-ya da eyni Expo hesabı ilə daxil olun.
-3. Telefonu və kompüteri eyni Wi-Fi şəbəkəsinə qoşun, sonra `npm run phone` işlədin.
-4. Terminaldakı QR-ni iPhone-un Kamera tətbiqi ilə oxudun və Expo Go ilə açın. iOS lokal şəbəkə icazəsi istəsə, icazə verin. Terminal açıq qalmalıdır.
-5. Wi-Fi bağlantısı alınmırsa, telefon serverini `Ctrl+C` ilə dayandırıb `npm run phone:tunnel` işlədin. Expo tunel üçün əlavə paket quraşdırmağı istəyə bilər. Tunel bağlantısı daha yavaş ola bilər.
+<table>
+  <tr>
+    <th>Ana səhifə</th>
+    <th>Kateqoriyalar</th>
+    <th>Məhsullar</th>
+  </tr>
+  <tr>
+    <td align="center"><a href="docs/images/home.webp"><img src="docs/images/home.webp" alt="Ana səhifədə axtarış, kateqoriyalar və məhsul vitrini" width="230"></a></td>
+    <td align="center"><a href="docs/images/categories.webp"><img src="docs/images/categories.webp" alt="Geyim kateqoriyasının qrupları və alt bölmələri" width="230"></a></td>
+    <td align="center"><a href="docs/images/products.webp"><img src="docs/images/products.webp" alt="Məhsul kataloqunda axtarış, filtrlər, qiymət və minimum sifariş" width="230"></a></td>
+  </tr>
+  <tr>
+    <th>Mağazalar</th>
+    <th>Mağaza admini</th>
+    <th>Superadmin</th>
+  </tr>
+  <tr>
+    <td align="center"><a href="docs/images/stores.webp"><img src="docs/images/stores.webp" alt="Mağaza kataloqunda təchizatçılar və onların məhsulları" width="230"></a></td>
+    <td align="center"><a href="docs/images/seller.webp"><img src="docs/images/seller.webp" alt="Mağaza admininin məhsul, baxış və əlaqə statistikası" width="230"></a></td>
+    <td align="center"><a href="docs/images/admin.webp"><img src="docs/images/admin.webp" alt="Superadmin panelində müraciətlər, məhsul yoxlamaları və şikayətlər" width="230"></a></td>
+  </tr>
+</table>
 
-`npm run phone` Expo Go üçün LAN bağlantısını 8084 portunda açır. `npm start` Android virtual cihazı üçün 8083 localhost bağlantısını saxlayır. İnkişaf rejimində nümunə kataloq və iki test paneli API olmadan işləyir. Real hesaba giriş və müraciət göndərişi canlı rejimdə yoxlanmalıdır.
+*Şəkillər nümunə kataloq və sınaq panellərindən götürülüb. Android ekran çəkilişləri iPhone üslubunda çərçivədə təqdim olunur. Böyütmək üçün şəklin üzərinə klikləyin.*
 
-Rəsmi təlimat: https://docs.expo.dev/get-started/start-developing/
+## İmkanlar
 
-## Yoxlama və test yığımı
+### Alıcı üçün
 
-- npm run typecheck — TypeScript
-- npm run lint — lint
-- npm test — kritik API davranışı
-- npx expo export --platform android — Android JavaScript yığımının yoxlanması
+- Məhsul və mağaza axtarışı, kateqoriya ağacı və alt kateqoriyalar.
+- Şəhər, qiymət, stok və təsdiqlənmiş mağazaya görə filtrlər; sıralama və siyahı/kart görünüşü.
+- Məhsul şəkilləri, topdan qiymət, minimum sifariş və mağaza profili.
+- Seçilmiş məhsullar və mağazalar, son baxılanlar və son axtarışlar.
+- “Axtardığım məhsul” bölməsində tələb yerləşdirmək və satıcı təkliflərinə baxmaq.
+- Məhsul və mağaza paylaşımı, problem bildirmə, mağaza açma və dəstək müraciətləri.
 
-eas.json development və preview profillərini saxlayır. Expo hesabına girişdən sonra EAS preview mühitində EXPO_PUBLIC_API_BASE_URL dəyişənini telefonun çata bildiyi API ünvanına qurun; lokal .env bulud yığımına ötürülmür. Sonra npx eas-cli build --platform android --profile preview quraşdırılan Android APK yaradır. Lokal IP dəyişərsə, preview mühitini yeniləyib yenidən yığın. iPhone funksiyalarını Expo Go ilə sınamaq olar. Fiziki iPhone üçün ayrıca imzalanmış development build Apple Developer hesabı tələb edir.
+### Mağaza sahibi üçün
 
-## Performans
+Məhsul əlavə etmək və redaktə etmək, qaralamanı saxlamaq, yoxlanışa göndərmək, mağaza profilini yeniləmək və alıcı tələblərinə təklif vermək. Paneldə baxışlar, əlaqə klikləri və məhsul statusları göstərilir.
 
-Emulyatorun yavaşlığı, siyahıların donması və ya keçidlərin ləng olması halında `docs/performance.md` sənədinə baxın. Qısa yol:
+### İdarəetmə üçün
 
-- `npm run emu:status` — emulyatorun sürətləndirmə (WHPX), GPU, animasiya və ekran vəziyyətini göstərir.
-- `npm run emu:turbo` — animasiyaları standart sürətdə saxlayır və fon proseslərini təmizləyir (geri qaytarma: `npm run emu:reset`).
-- `npm run emu:lowres` — eyni, üstəgəl 720x1600 / 320dpi (emulyatorda ən böyük FPS artımı).
-- `npm run emu:config` — emulyator bağlı ikən AVD `config.ini` faylını optimallaşdırır (ehtiyat nüsxə ilə).
-- `npm run emu:launch` — emulyatoru sürətli flaglarla (`-gpu host -no-audio -no-boot-anim`) başladır.
-- `npm run android:x86` — native build-i yalnız x86_64 üçün qurur (Metro işləyərkən daha sürətli quraşdırma).
+Mağaza müraciətləri və məhsul yoxlamaları, təsdiq/rədd əməliyyatları, istifadəçilər, kateqoriyalar, şikayətlər, statistika və audit qeydləri.
 
-Uzun siyahılar (`Məhsullar`, `Mağazalar`, satıcı və admin siyahıları) `FlatList` ilə virtualizasiya olunur, kartlar `React.memo` ilə qorunur, şəkillər `expo-image` keşindən götürülür.
+### Gündəlik istifadədə
 
-## Qovluqlar
+Formalar avtomatik qaralama saxlayır; yazılanları itirmədən geri qayıtmaq mümkündür. Bağlantı kəsiləndə əvvəl yüklənmiş açıq kataloq məlumatları göstərilə bilər və köhnə məlumat ayrıca işarələnir. Canlı API-yə qoşulanda seçilmişlər və hesaba bağlı alıcı tələbləri cihazlar arasında sinxronlaşır.
 
-- src/app — açıq kataloq, giriş, satıcı və admin ekranları
-- src/api — API tipləri, sorğular, Bearer giriş və token yenilənməsi
-- src/features — kataloq, satıcı yükləməsi və admin məlumatları
-- src/components / src/theme — ortaq telefon interfeysi və yalnız işıqlı görünüş
-- src/lib — əlaqə keçidləri və hadisə izləməsi
-- tests — API və sessiya üçün avtomatik yoxlamalar
+TopdanBazar-da səbət, onlayn ödəniş və çatdırılma axını yoxdur. Satış şərtləri alıcı ilə satıcı arasında dəqiqləşdirilir.
 
-Refresh token cihazın SecureStore yaddaşında saxlanır; access token yalnız tətbiq yaddaşındadır. Veb tətbiqin cookie/CSRF girişi ayrıca işləyir. Bildirişlər tətbiq daxilində göstərilir; push və şifrə bərpasının kodu hazırdır, xidmət ayarları tələb olunur. [Alıcı imkanları və quraşdırma](docs/BUYER_FEATURES.md).
+## Quraşdırma
 
-## Sınaq hesabları
+Node.js-in Expo SDK 57 ilə uyğun versiyası, npm və telefonda uyğun Expo Go lazımdır. Native Android yığımı üçün Android SDK, iOS yığımı üçün macOS və Xcode tələb olunur.
 
-Yerli və ya sonradan qoşulacaq canlı məlumatda yalnız ayrılmış sınaq hesablarından istifadə edin. Məhsul təsdiqi, silmə, mağaza dəyişiklikləri və toplu admin qərarları real istifadəçilərin məlumatını dəyişir.
+```sh
+git clone https://github.com/IsrafilIsakhli/topdanci-mobile.git
+cd topdanci-mobile
+npm ci
+```
+
+`.env.example` faylının surətini `.env` adı ilə yaradın.
+
+Windows / PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+macOS / Linux:
+
+```sh
+cp .env.example .env
+```
+
+### Telefonda açmaq
+
+Nümunə kataloq üçün ayrıca server və məlumat bazası lazım deyil. `EXPO_PUBLIC_DEMO_CATALOG=true` saxlayın:
+
+```sh
+npm run phone
+```
+
+Telefon və kompüter eyni Wi-Fi-da olmalıdır. iPhone-da Kamera ilə terminaldakı QR-kodu oxudun və Expo Go ilə açın. Android-də Expo Go-nun QR oxuyucusundan istifadə edin.
+
+Wi-Fi bağlantısı alınmırsa:
+
+```sh
+npm run phone:tunnel
+```
+
+Expo hesabına giriş tələb olunarsa, kompüterdə `npx expo login --browser` işlədin və Expo Go-da eyni hesabı seçin. Tunel üçün əlavə paket quraşdırılması istənə bilər.
+
+Metro prosesi işləməlidir. Lokal kompüter söndürülsə, həmin test bağlantısı dayanır. Codespaces istifadə edirsinizsə, Codespace və oradakı Metro prosesi aktiv qalmalıdır. Bu rejim App Store və ya Play Store buraxılışı deyil.
+
+### Panelləri sınamaq
+
+Nümunə rejimində giriş səhifəsində mağaza admini və superadmin üçün test kartları var. Bunlar yalnız inkişaf rejimində işləyir və real hesablara səlahiyyət vermir.
+
+[Test girişləri və panel imkanları →](docs/ADMIN_PANELS.md)
+
+### Canlı API-yə qoşulmaq
+
+```dotenv
+EXPO_PUBLIC_DEMO_CATALOG=false
+EXPO_PUBLIC_API_BASE_URL=https://api.example.com/api/v1
+EXPO_PUBLIC_WEB_BASE_URL=https://example.com
+EXPO_PUBLIC_CDN_BASE_URL=
+```
+
+Yuxarıdakı ünvanları öz xidmətlərinizlə əvəz edin. API-də mobil giriş, alıcı tələbləri və seçilmişlər üçün uyğun endpoint-lər və miqrasiyalar olmalıdır.
+
+Backend ayrıca [Topdanci.az reposunda](https://github.com/IsrafilIsakhli/Topdanci.az) saxlanılır. Bu repo mobil tətbiqin kodudur.
+
+`.env` dəyişəndə Metro-nu yenidən başladın. Fiziki telefonda `localhost` kompüterə yönəlmir; lokal API üçün kompüterin LAN ünvanını və ya telefonun çata bildiyi HTTPS ünvanını yazın. `EXPO_PUBLIC_*` dəyişənləri mobil paketdə görünür — məxfi açarları burada saxlamayın.
+
+## Hazırkı vəziyyət
+
+| Bölmə | Vəziyyət |
+| --- | --- |
+| Kataloq, axtarış, kateqoriyalar və idarəetmə panelləri | Nümunə rejimində sınaqdan keçirilə bilər |
+| Canlı giriş, müraciətlər və hesab sinxronlaşması | Yenilənmiş API və miqrasiyalar tələb edir |
+| İnternet olmayanda kataloqa baxış | Əvvəl yüklənmiş açıq məlumatlarla işləyir; bütün məlumat və şəkillər üçün zəmanət vermir |
+| Şifrə bərpası | Kod hazırdır; e-poçt xidməti və göndərən domen qoşulmalıdır |
+| Push bildirişləri | Kod hazırdır; Expo/EAS, FCM/APNs və uyğun native build qurulmalıdır |
+| Sayt linkindən tətbiqin birbaşa açılması | Domen əlaqələndirməsi və yeni native build tələb edir |
+
+Nümunə rejimində əlaqə düymələri real zəng və mesaj açmır, müraciət və şikayətlər serverə göndərilmir. Release yığımında nümunə kataloq və test girişləri aktiv deyil.
+
+[Canlı rejim, şifrə bərpası və bildirişlərin quraşdırılması →](docs/BUYER_FEATURES.md)
+
+## Texniki quruluş
+
+| Hissə | İstifadə olunan |
+| --- | --- |
+| Tətbiq | React Native 0.86 · Expo SDK 57 · React 19 · TypeScript |
+| Səhifələr və keçidlər | Expo Router |
+| Sorğular və server məlumatları | TanStack Query |
+| Cihaz yaddaşı | SecureStore · AsyncStorage |
+| Şəkillər və hərəkət | Expo Image · Reanimated |
+| Avtomatik yoxlamalar | Vitest · ESLint · TypeScript |
+
+```text
+src/
+  app/          Açıq kataloq, hesab, satıcı və admin səhifələri
+  api/          Sorğular, tiplər və sessiya idarəetməsi
+  features/     Kataloq, alıcı imkanları, formalar və panellər
+  components/   Ortaq interfeys elementləri
+  theme/        Rəng, ölçü və görünüş qaydaları
+  lib/          Köməkçi funksiyalar
+tests/          Avtomatik yoxlamalar
+docs/           Quraşdırma, sınaq və ekran görüntüləri
+```
+
+Refresh token SecureStore-da saxlanır, access token isə tətbiqin yaddaşında qalır. Şəxsi hesab və idarəetmə cavabları açıq kataloqun oflayn keşinə yazılmır.
+
+## Yoxlamalar
+
+```sh
+npm run typecheck
+npm run lint
+npm test
+```
+
+Android JavaScript yığımını da yoxlamaq üçün:
+
+```sh
+npx expo export --platform android
+```
+
+Bütün yoxlamaları ardıcıl işlədir: `npm run verify`.
+
+## Sənədlər
+
+- [Native yığım, test bağlantısı və EAS](docs/DEVELOPMENT.md)
+- [Mağaza admini və superadmin](docs/ADMIN_PANELS.md)
+- [Alıcı imkanları və xidmətlərin qoşulması](docs/BUYER_FEATURES.md)
+- [Səhifə keçidləri](docs/NAVIGATION.md)
+- [Android emulyatorunun performansı](docs/performance.md)
+- [Məhsul kataloqu üçün sınaq siyahısı](docs/PRODUCTS_PAGE_QA.md)
